@@ -37,13 +37,18 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
     handleDisconnect(client: any) {
         console.log(`${client.id} desconectado!`);
-        delete this.clients[client.id];
-
-        this.server.emit('users', {
-            user: client.id,
-            action: 'disconnected'
-        });
-    }
+    
+        if (this.clients[client.id]) {
+            delete this.clients[client.id];
+    
+            // Emite para todos os clientes a lista atualizada de usuários
+            const connectedUsers = Object.keys(this.clients);
+            this.server.emit('users', {
+                users: connectedUsers,
+                action: 'disconnected'
+            });
+        }
+    }       
 
     @SubscribeMessage('chat')
     chat(client: any, data: any) {

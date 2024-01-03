@@ -10,6 +10,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
     <title>PetShop Chat</title>
     <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
         .own-message {
             text-align: right;
             color: #007bff;/* Cor de texto da mensagem própria (opcional) */
@@ -27,16 +31,27 @@
 
     <div class="container">
         <h1>PetShop Chat</h1>
-        <ul id="message-list"></ul>
+        
+        <div class="row">
+            <div class="column column-100">
+                <ul id="message-list"></ul>
+            </div>
+        </div>
 
         <div class="row">
-            <div class="column">
+            <div class="column column-80">
                 <input type="text" id="message">
             </div>
             <div class="column column-10">
                 <button id="btn-send">ENVIAR</button>
             </div>
-            <div class="column column-20" style="background-color: #bbb">
+        </div>
+
+        <br>
+
+        <h6>Usuários conectados:</h6>
+        <div class="row">
+            <div class="column" style="background-color: #dcdcdc">
                 <ul id="user-list"></ul>
             </div>
         </div>
