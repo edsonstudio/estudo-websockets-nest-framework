@@ -7,7 +7,6 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
     handleConnection(client: any) {
         console.log(`${client.id} conectado!`);
-        client.emit('connection', 'Conectado com sucesso ao servidor');
         client.broadcast.emit('users', {
             user: client.id,
             action: 'connected'
@@ -15,7 +14,11 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     }
 
     handleDisconnect(client: any) {
-
+        console.log(`${client.id} desconectado!`);
+        client.broadcast.emit('users', {
+            user: client.id,
+            action: 'disconnected'
+        });
     }
 
     @SubscribeMessage('chat')
