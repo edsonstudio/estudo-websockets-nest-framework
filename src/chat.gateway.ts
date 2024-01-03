@@ -6,7 +6,12 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @WebSocketServer()
 
     handleConnection(client: any) {
-
+        console.log(`${client.id} conectado!`);
+        client.emit('connection', 'Conectado com sucesso ao servidor');
+        client.broadcast.emit('users', {
+            user: client.id,
+            action: 'connected'
+        });
     }
 
     handleDisconnect(client: any) {
